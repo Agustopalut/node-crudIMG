@@ -1,0 +1,11 @@
+folder database untuk database.js:
+    -config untuk menghubungkan ke database.
+    -gunaka sequelize lalu gunakan clas new Sequelize(namadb,username,password,{host,dialect})
+    lalu di export;
+folder modeld untuk table users nya:
+    -gunakan Sequelize dan tangkap database.js nya
+    -tangkap object DataTypes yang ada di Sequelize
+    -lalu buat varible yang berisi table" yang didefiniskan
+    -contoh:
+    -const users = db.define(namatable,{entity},{freezeTableName})
+    -lalu export

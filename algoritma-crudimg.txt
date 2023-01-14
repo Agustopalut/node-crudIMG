@@ -1,0 +1,42 @@
+controller:
+-getProduct.js
+    mendapatkan semua data
+-getProductBYId..js
+    mendapatkan data berdasarkan id yang dikirim
+savproduct.js 
+    -lakukan kondisi terlebih dahulu,apakah user mengirim sebuah file
+    -jika tidak,maka kembalikan sebuah status 400,dan sebuah message
+    -jika ada,maka tangkap value inputan nama products,tangkap file nya.
+    -tangkap size dari file yang dikirim,tangkpa ext file menggunakan package path bawaan nodejs (path.extname(file.name))
+    -lalu buatlah varible yang menampung nama baru file nya beserta ext nya
+    -buat nama file tersebut menjadi string acak menggunakan md5 dan gabungkan dengan extension nya
+    - lalu buat sebuah varibler bernama url yang menampung url penyimpanan file tersebut di folder
+    contoh : 
+     const url = `${req.protocol}://${req.get("host")}/images/${fileName}`
+    - lalu buat data array,yang berisi extension" file yang diizinkan
+    -lalu buat kondisi menggunakan includes
+    -jika extension file tersebut tidak ada di dalam data yang diizinkan(array),maka kirimkan sebuah status 400 dan sebuah message
+    -jika ada,lanjut ke code selanjutnya
+    -lalu buat kondisi lagi
+    -jika size file lebih besar dari 5mb (5.000.000 dalam bentuk mega),maka kembalikan sebuah kirimkan status 400 dan sebuah message
+    -jika tidak,lanjur ke code selanjutnya
+    -lalu file yang dikirim user masukan kedalam folder backend/server menggunakan attribute mv(file.mv)
+    syntax : file.mv("url ke folder nya",callback)
+    -gunakan async await pada callback nya
+    -terdapat parameter error di callback nya
+    -jika terdapat error maka kembalikan kiriman status 400 dan sebuah message yang di ambil dari parameter nya
+    -jika tidak ada,masukan kedalam database,gunaka block try catch,
+
+product.js
+    -tangkap id dari parameter yang dikirim user nya
+    -lalu cari data berdasarkan id yang dikirim
+    -lalu buatlah sebuah kondisi
+    -jika datanya tidak ada,maka kembalikan sebuah kiriman status dan sebuah message
+    -jika ada,buat variable untuk menampung nama file yang dikirim dan untuk url barunya
+    -lalu buat kondisi,jika user tidak mengirim file,maka nama file nya masih menggunakan nama file yang lama/dari database lalu masukan ke dalam variable filename 
+    yang baru
+    -jika mengirim,maka lalukan sama seperti di save product
+    -setelah buat variable",hapus foto di folder tersebut menggunakan fs.unlinkSync(path)
+    -lalu buat baru 
+    -lalu masukan kedalam database (gunakan block try catch)
+    -lalu kirim ke fe
